@@ -29,57 +29,6 @@
   --mono:       'DM Mono', monospace;
 }
 
-/* ── DARK MODE ── */
-[data-theme="dark"] {
-  --green:      #22C98F;
-  --green-dark: #0D5C42;
-  --green-dim:  #0D2E22;
-  --l1-bg:      #2A2410; --l1-bdr: #9A8420; --l1-txt: #E6C84A;
-  --l2-bg:      #2A1A0E; --l2-bdr: #C05A20; --l2-txt: #E07840;
-  --l3-bg:      #2A1010; --l3-bdr: #B02020; --l3-txt: #E05050;
-  --pol-bg:     #1E1E1C; --pol-bdr: #666660; --pol-txt: #AAAAAA;
-  --err-row:    #2A1212;
-  --bg:         #111110;
-  --surface:    #1A1A18;
-  --border:     #2E2E2A;
-  --text:       #E8E8E4;
-  --muted:      #666662;
-}
-
-/* dark mode overrides for elements that use hardcoded colors */
-[data-theme="dark"] .item:nth-child(even)       { background: #1E1E1C; }
-[data-theme="dark"] .item:hover                  { background: #242422; }
-[data-theme="dark"] .item.active                 { background: var(--err-row) !important; }
-[data-theme="dark"] .item.active .itext          { color: #E05050; }
-[data-theme="dark"] .check-box                   { background: #2A2A28; border-color: #444440; }
-[data-theme="dark"] .lvl-input                   { background: #222220; color: var(--text); border-color: #2E2E2A; }
-[data-theme="dark"] .lvl-input.has-l1            { background: var(--l1-bg); color: var(--l1-txt); }
-[data-theme="dark"] .lvl-input.has-l2            { background: var(--l2-bg); color: var(--l2-txt); }
-[data-theme="dark"] .lvl-input.has-l3            { background: var(--l3-bg); color: var(--l3-txt); }
-[data-theme="dark"] .lvl-total-val               { background: #1A1A18; border-color: #2E2E2A; }
-[data-theme="dark"] .lvl-total-val.active        { background: #2A1212; color: #E05050; border-color: #B02020; }
-[data-theme="dark"] .yn-btn                      { background: #222220; color: var(--muted); }
-[data-theme="dark"] .yn-btn.yes.active           { background: #B02020; color: white; border-color: #B02020; }
-[data-theme="dark"] .yn-btn.no.active            { background: #3A3A38; color: white; }
-[data-theme="dark"] .item.active .yn-wrap        { border-color: #B02020; }
-[data-theme="dark"] .meta-field                  { background: #222220; }
-[data-theme="dark"] .meta-input                  { color: var(--text); }
-[data-theme="dark"] .status-strip                { background: var(--surface); }
-[data-theme="dark"] .topbar                      { background: var(--surface); }
-[data-theme="dark"] .sum-card                    { background: #222220; }
-[data-theme="dark"] .report-table td             { background: var(--surface); }
-[data-theme="dark"] .report-table tr:nth-child(even) td { background: #1E1E1C; }
-[data-theme="dark"] .report-table tr:nth-child(even) td.rt-level-l1 { background: var(--l1-bg); }
-[data-theme="dark"] .report-table tr:nth-child(even) td.rt-level-l2 { background: var(--l2-bg); }
-[data-theme="dark"] .report-table tr:nth-child(even) td.rt-level-l3 { background: var(--l3-bg); }
-[data-theme="dark"] .report-table tr:nth-child(even) td.rt-level-pol { background: var(--pol-bg); }
-[data-theme="dark"] .copy-hint                   { background: #2A2410; border-color: #9A8420; color: #E6C84A; }
-[data-theme="dark"] .no-errors-msg h3            { color: var(--text); }
-[data-theme="dark"] .sum-table td                { background: var(--surface); }
-[data-theme="dark"] .sum-table tr:nth-child(even) td { background: #1E1E1C; }
-[data-theme="dark"] #view-checklist .items-wrap  { border-color: var(--border); }
-[data-theme="dark"] .btn-reset-tab               { color: var(--muted); border-color: var(--border); }
-
 body {
   font-family: var(--font);
   background: var(--bg);
@@ -171,27 +120,7 @@ body {
   margin-top: auto;
   padding: 14px 18px;
   border-top: 1px solid rgba(255,255,255,.1);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }
-.btn-theme {
-  width: 100%;
-  padding: 7px;
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.15);
-  border-radius: 6px;
-  color: rgba(255,255,255,.7);
-  font-size: 11.5px;
-  font-family: var(--font);
-  cursor: pointer;
-  transition: all .15s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-.btn-theme:hover { background: rgba(255,255,255,.15); color: white; }
 .btn-reset-all {
   width: 100%;
   padding: 7px;
@@ -354,127 +283,6 @@ body {
   transition: all .12s;
 }
 .btn-reset-tab:hover { border-color: #D94040; color: #D94040; background: var(--l3-bg); }
-
-/* ── SIMPLE SCALE SELECTOR ── */
-.scale-wrap {
-  display: flex; align-items: center; gap: 3px;
-  flex-shrink: 0; align-self: center;
-}
-.scale-btn {
-  padding: 0 10px; height: 28px;
-  border: 1.5px solid var(--border);
-  border-radius: 6px;
-  font-size: 10px; font-weight: 700;
-  font-family: var(--mono);
-  cursor: pointer; transition: all .12s;
-  background: var(--bg); color: var(--muted);
-  letter-spacing: .03em;
-}
-.scale-btn:hover { border-color: var(--green); color: var(--green); }
-.scale-btn.active-l1 { background: var(--l1-bg); color: var(--l1-txt); border-color: var(--l1-bdr); }
-.scale-btn.active-l2 { background: var(--l2-bg); color: var(--l2-txt); border-color: var(--l2-bdr); }
-.scale-btn.active-l3 { background: var(--l3-bg); color: var(--l3-txt); border-color: var(--l3-bdr); }
-[data-theme="dark"] .scale-btn { background: #222220; color: var(--muted); }
-
-/* ── BINARY YES / NO ── */
-.yn-wrap {
-  display: flex; align-items: center; gap: 0;
-  flex-shrink: 0; align-self: center;
-  border-radius: 7px; overflow: hidden;
-  border: 1.5px solid var(--border);
-  height: 28px;
-}
-.yn-btn {
-  padding: 0 12px; height: 28px;
-  border: none; font-size: 11px; font-weight: 600;
-  font-family: var(--mono);
-  cursor: pointer; transition: all .12s;
-  background: var(--bg); color: var(--muted);
-  letter-spacing: .03em;
-}
-.yn-btn.yes { border-right: 1.5px solid var(--border); }
-.yn-btn.yes:hover  { background: #1D9E72; color: white; }
-.yn-btn.no:hover   { background: #888; color: white; }
-.yn-btn.yes.active { background: #D94040; color: white; border-color: #D94040; }
-.yn-btn.no.active  { background: #4A4A48; color: white; }
-.item.active .yn-wrap { border-color: #D94040; }
-
-/* ── COUNTABLE LEVEL INPUTS ── */
-.item { cursor: default; }
-.item.active { background: var(--err-row) !important; }
-.item.active .itext { color: #7A0000; }
-
-.lvl-inputs {
-  display: flex; align-items: center; gap: 6px;
-  flex-shrink: 0; align-self: flex-start;
-  margin-top: 4px;
-  flex-wrap: nowrap;
-}
-.lvl-field {
-  display: flex; flex-direction: column;
-  align-items: center; gap: 2px;
-}
-.lvl-label {
-  font-size: 9px; font-weight: 700;
-  font-family: var(--mono);
-  letter-spacing: .04em;
-}
-.lbl-l1 { color: var(--l1-txt); }
-.lbl-l2 { color: var(--l2-txt); }
-.lbl-l3 { color: var(--l3-txt); }
-.lvl-input {
-  width: 40px; height: 30px;
-  border: 1.5px solid var(--border);
-  border-radius: 6px;
-  background: var(--surface);
-  color: var(--text);
-  font-size: 13px; font-weight: 600;
-  font-family: var(--mono);
-  text-align: center;
-  outline: none;
-  transition: border-color .12s;
-  -moz-appearance: textfield;
-}
-.lvl-input::-webkit-outer-spin-button,
-.lvl-input::-webkit-inner-spin-button { -webkit-appearance: none; }
-.lvl-input:focus { border-color: var(--green); }
-.lvl-input.has-l1 { border-color: var(--l1-bdr); background: var(--l1-bg); color: var(--l1-txt); }
-.lvl-input.has-l2 { border-color: var(--l2-bdr); background: var(--l2-bg); color: var(--l2-txt); }
-.lvl-input.has-l3 { border-color: var(--l3-bdr); background: var(--l3-bg); color: var(--l3-txt); }
-.lvl-total {
-  display: flex; flex-direction: column;
-  align-items: center; gap: 2px;
-}
-.lvl-total-label {
-  font-size: 9px; font-weight: 700;
-  font-family: var(--mono); color: var(--muted);
-  letter-spacing: .04em;
-}
-.lvl-total-val {
-  width: 34px; height: 30px;
-  border: 1.5px solid var(--border);
-  border-radius: 6px;
-  background: var(--bg);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 700;
-  font-family: var(--mono);
-  color: var(--muted);
-}
-.lvl-total-val.active { color: #D94040; border-color: #D94040; background: #FFF0F0; }
-
-.qty-badge {
-  display: inline-flex; align-items: center;
-  font-size: 10px; font-weight: 700;
-  font-family: var(--mono);
-  padding: 1px 6px; border-radius: 99px;
-  margin-left: 4px;
-  vertical-align: middle;
-}
-.qb-l1  { background: var(--l1-bg); color: var(--l1-txt); border: 1px solid var(--l1-bdr); }
-.qb-l2  { background: var(--l2-bg); color: var(--l2-txt); border: 1px solid var(--l2-bdr); }
-.qb-l3  { background: var(--l3-bg); color: var(--l3-txt); border: 1px solid var(--l3-bdr); }
-.qb-pol { background: var(--pol-bg); color: var(--pol-txt); }
-.qb-yes { background: var(--l3-bg); color: var(--l3-txt); border: 1px solid var(--l3-bdr); }
 
 /* ── ERROR REPORT VIEW ── */
 .report-view { padding: 24px 28px; }
@@ -640,10 +448,6 @@ body {
     <div id="nav-tabs"></div>
 
     <div class="sidebar-bottom">
-      <button class="btn-theme" id="btn-theme" onclick="toggleTheme()">
-        <span id="theme-icon">🌙</span>
-        <span id="theme-label">Modo oscuro</span>
-      </button>
       <button class="btn-reset-all" onclick="confirmResetAll()">Reset completo</button>
     </div>
   </nav>
@@ -696,7 +500,7 @@ body {
 
 <script>
 // ── DATA ──────────────────────────────────────────────────────
-const TABS = ["Floor Plan","RCP","Elevation","Roof Plan","PDF","Policy"];
+const TABS = ["Floor Plan","RCP","Elevation","Roof Plan","PDF","RVT","Policy"];
 
 const DATA = {
 "Floor Plan": {
@@ -854,6 +658,70 @@ const DATA = {
     "Missing floor area plans",
   ],
 },
+"RVT": {
+  "L1": [
+    "Individual slope ceilings on level not adjusted to correct height",
+    "Missing exterior component",
+    "Missed ceiling or RCP component",
+    'Windows: missing, undersized/oversized, wrong type, wrong side, width/height not set',
+    'Doors: missing, wrong type, undersized/oversized, width not in 2" intervals, height not set',
+    "Room divisions (separation lines): missing or improperly placed",
+    "Columns: missing or improperly sized/placed",
+    "Missing single step/transition between rooms or floors",
+    "Stair label UP/DN: missing, not moved off stair, incomplete arrow, missing riser count",
+    "Missing exterior features (decks, patios, porches) or improperly drafted",
+    "Missing fireplaces, raised hearths, or F/P label",
+    "Partial missing or incorrect premium objects",
+    "Missing elevator detail lines or CAB outline",
+    "Missing partial railings or minor adjustments",
+    "New/existing level not renamed",
+    "Missing void 'X' detail line",
+    "Wall joint not cohesive",
+    "Roof needs minor adjustment",
+    "Missing soffit",
+    "Missing gutter",
+    "Gable not joined correctly",
+    "Elevation/walls not edited to reflect actual construction — little editing needed",
+  ],
+  "L2": [
+    "All slope ceilings on level not adjusted to correct height",
+    "Missing all exterior components per elevation (R/L/Front/Rear)",
+    "Missing ceilings or RCP components per level",
+    "Minor misalignment affecting couple of rooms or one floor",
+    "Minor re-drafting causing <2% SF change",
+    "Interior/exterior wall types or sizes incorrect",
+    "Missing a space that can be drafted within property boundary",
+    "DXF/laser data misinterpretation",
+    "Stairs drafted to incorrect length, width, or shape",
+    "Misinterpreting or ignoring operator/task notes",
+    "Improper designation of restricted heights, ledges & bay windows",
+    "Missing premium objects for entire room/space",
+    "New levels not set to 'Planitar' template or not at 10'-0\" spacing",
+    "Missing a few ceiling heights on one level — minimal effort made",
+    "Missing floor boundaries (minimal effort) — stairs, elevator, open to below",
+    "Missing railings or major adjustment needed",
+    "Missing all exterior structural elements",
+    "Roof needs major adjustment or missing segments",
+    "Incorrect family type of roof or roof type not edited for thickness",
+    "Missing all soffits / gutters / gables not joined correctly",
+    "Elevations/walls not edited to reflect construction — significant editing needed",
+  ],
+  "L3": [
+    "Missing roof",
+    "Missing premium objects for entire floor (L3 per level)",
+    "No ceilings or RCP components modeled or placed",
+    "Stairs do not reach correct level/height",
+    "Major misalignment affecting large portion or entire property — no effort made",
+    "Major re-drafting causing >2% SF change",
+    "Floor-to-floor exterior walls not correctly snapped",
+    "Drafting spaces that should not/cannot be drafted",
+    "Failing to create new level for verifiable detached structures",
+    "Missing floor boundaries for all levels",
+    "Failing to turn off underlay on all levels",
+    "Failing to follow DWG/RVT/Add-On Deliverables (catch-all SOP error)",
+    "No effort made for elevations/walls materials to reflect existing",
+  ],
+},
 "Policy": {
   "Policy": [
     "Failing to export to correct units (Imperial/Metric)",
@@ -876,161 +744,6 @@ const LEVEL_CFG = {
 };
 
 const LEVEL_TD = { L1:"rt-level-l1", L2:"rt-level-l2", L3:"rt-level-l3", Policy:"rt-level-pol" };
-// SIMPLE_SCALE: items with a single level selector (L1/L2/L3 radio)
-// Value = array of allowed levels for that item
-const SIMPLE_SCALE = {
-  // ── ROOF PLAN ─────────────────────────────────────────────
-  "Roof Plan||L1||0": ["L1","L2","L3"], // Roof adjustment
-  "Roof Plan||L1||1": ["L1","L2"],      // Missing slope arrow
-  "Roof Plan||L1||2": ["L1","L2"],      // Missing soffit
-  "Roof Plan||L1||3": ["L1","L2"],      // Missing gutter
-  "Roof Plan||L1||4": ["L1","L2"],      // Gable not joined
-
-  // ── ELEVATION ─────────────────────────────────────────────
-  "Elevation||L1||4": ["L1","L2","L3"], // Elevation detail lines
-  "Elevation||L1||5": ["L1","L2","L3"], // Roof adjustment
-  "Elevation||L1||8": ["L1","L2","L3"], // Walls not edited
-
-  // ── FLOOR PLAN ────────────────────────────────────────────
-  "Floor Plan||L2||0":  ["L2","L3"],    // Misalignment
-  "Floor Plan||L2||15": ["L2","L3"],    // Missing floor boundaries
-  "Floor Plan||L2||16": ["L1","L2"],    // Missing railings
-};
-
-
-const COUNTABLE = new Set([
-  // ── FLOOR PLAN ──────────────────────────────────────────
-  "Floor Plan||L1||0",  // Windows
-  "Floor Plan||L1||1",  // Doors
-  "Floor Plan||L1||2",  // Room labels
-  "Floor Plan||L1||3",  // Room divisions
-  "Floor Plan||L1||4",  // Columns
-  // 5: Missing single step → binary
-  // 6: Stair label → binary
-  "Floor Plan||L1||7",  // Missing exterior features
-  "Floor Plan||L1||8",  // Missing fireplaces
-  "Floor Plan||L1||9",  // Partial missing premium objects
-  "Floor Plan||L1||10", // Missing object detail lines
-  "Floor Plan||L1||11", // Failing to adjust bathroom partitions
-  "Floor Plan||L1||12", // Missing upper cabinet(s)
-  "Floor Plan||L1||13", // Missing elevator detail lines
-  "Floor Plan||L1||14", // Missing partial railings
-  // 15: Room boundaries showing on other levels → binary
-  // 16: Level not renamed → binary
-  "Floor Plan||L1||17", // Missing void X detail line
-  "Floor Plan||L1||18", // Wall joint
-
-  "Floor Plan||L2||0",  // Minor misalignment (rooms)
-  // 1: Minor re-drafting <2% → binary
-  "Floor Plan||L2||2",  // Interior walls wrong sizes
-  // 3: Exterior walls not to point cloud → binary
-  // 4: Walls not dimensioned → binary
-  "Floor Plan||L2||5",  // Missing space (closet)
-  "Floor Plan||L2||6",  // DXF misinterpretation
-  // 7: Stairs incorrect → binary
-  // 8: Misinterpreting notes → binary
-  "Floor Plan||L2||9",  // Improper restricted heights
-  // 10: Incorrect room label units → binary
-  "Floor Plan||L2||11", // Missing premium objects (room)
-  "Floor Plan||L2||12", // Missing upper cabinets (level)
-  // 13: New levels not Planitar template → binary
-  "Floor Plan||L2||14", // Missing ceiling heights
-  // 15: Missing floor boundaries → binary
-  "Floor Plan||L2||16", // Missing railings
-  "Floor Plan||L2||17", // Failing to create room tag for voids
-  // 18: Missing all exterior structural → binary
-
-  // L3 Floor Plan: mostly binary — scope/severity conditions
-  "Floor Plan||L3||3",  // Drafting spaces that shouldn't
-  "Floor Plan||L3||4",  // Missing a major space
-  "Floor Plan||L3||7",  // Missing premium objects (floor)
-
-  // ── RCP ─────────────────────────────────────────────────
-  "RCP||L1||0",  // Missing individual ceiling component
-  "RCP||L1||1",  // Missing bulkhead
-  "RCP||L1||2",  // Missing spot elevation
-  "RCP||L1||3",  // Missing skylight
-  "RCP||L1||4",  // Missing ceiling component
-  // 5: Windows not on RCP → binary
-
-  "RCP||L2||0",  // Missing individual ceilings
-  "RCP||L2||1",  // Missing bulkheads/sloped on level
-  // 2: Failed to override → binary
-  "RCP||L2||3",  // Missing multiple ceiling components (room)
-  "RCP||L2||4",  // Missing spot elevations (level)
-
-  // RCP L3: all binary
-
-  // ── ELEVATION ───────────────────────────────────────────
-  "Elevation||L1||0",  // Window height
-  "Elevation||L1||1",  // Door height
-  "Elevation||L1||2",  // Missing windowsill/header
-  "Elevation||L1||3",  // Missing exterior component
-  // 4: Detail lines minor → binary
-  // 5: Roof minor → binary
-  "Elevation||L1||6",  // Missing slope annotation
-  "Elevation||L1||7",  // Missing dimension string
-  // 8: Walls not edited → binary
-  "Elevation||L1||9",  // Gaps
-
-  // 0: Missing all dimension strings → binary
-  "Elevation||L2||1",  // Missing exterior components (elevation)
-  // 2,3,4: significant rework → binary
-
-  // Elevation L3: all binary
-
-  // ── ROOF PLAN ───────────────────────────────────────────
-  // 0: Roof minor → binary
-  "Roof Plan||L1||1",  // Missing slope arrow
-  // 2: Missing soffit → binary
-  // 3: Missing gutter → binary
-  "Roof Plan||L1||4",  // Gable not joined
-
-  "Roof Plan||L2||1",  // Missing multiple slope arrows
-  // rest → binary
-
-  // Roof Plan L3: binary
-
-  // ── PDF ─────────────────────────────────────────────────
-  "PDF||L1||0",  // QR code
-  "PDF||L1||1",  // North arrow
-  "PDF||L1||2",  // Property name
-  "PDF||L1||3",  // Point cloud grey
-  "PDF||L1||4",  // Missing dimension
-  // 5: Sheet numbers → binary
-  "PDF||L1||6",  // Floor area not edited
-
-  // 0,1,2: all sheets conditions → binary
-  "PDF||L2||3",  // Point cloud not cropped (level)
-  "PDF||L2||4",  // Missing DXF
-  "PDF||L2||5",  // Multiple dimensions
-  "PDF||L2||6",  // Missing sheet view
-  // 7: All floor areas → binary
-
-  // PDF L3: all binary
-
-  // ── RVT ─────────────────────────────────────────────────
-  // 7: Missing single step → binary
-  // 8: Stair label → binary
-  // 14: Level not renamed → binary
-  // 17: Roof minor → binary
-  // 18: Missing soffit → binary
-  // 19: Missing gutter → binary
-  // 21: Elevation/walls not edited → binary
-
-  // 4: Minor re-drafting → binary
-  // 5: Wall types/sizes → binary
-  // 8: Stairs incorrect → binary
-  // 9: Ignoring notes → binary
-  // 12: New levels not Planitar → binary
-  // 14: Missing floor boundaries → binary
-  // 16-20: structural/roof/elevation conditions → binary
-
-  // RVT L3
-
-  // Policy: all binary
-]);
-
 
 // ── STATE ────────────────────────────────────────────────────
 let state    = {};
@@ -1075,42 +788,20 @@ function showSaved() {
 
 // ── COUNTS ───────────────────────────────────────────────────
 function getCounts(filterTab) {
-  let l1=0, l2=0, l3=0, pol=0;
+  let l1=0,l2=0,l3=0,pol=0;
   Object.entries(DATA).forEach(([tab, sections]) => {
     if (filterTab && tab !== filterTab) return;
     Object.entries(sections).forEach(([sec, items]) => {
       items.forEach((_, i) => {
-        const k   = storageKey(tab, sec, i);
-        const raw = state[k];
-        if (!raw) return;
-
-        if (COUNTABLE.has(`${tab}||${sec}||${i}`)) {
-          // Repetible: state = {l1, l2, l3}
-          if (typeof raw === 'object') {
-            l1 += raw.l1 || 0;
-            l2 += raw.l2 || 0;
-            l3 += raw.l3 || 0;
-          }
-
-        } else if (SIMPLE_SCALE[`${tab}||${sec}||${i}`]) {
-          // Simple scale: state = "L1" | "L2" | "L3"
-          if (raw === 'L1') l1 += 1;
-          else if (raw === 'L2') l2 += 1;
-          else if (raw === 'L3') l3 += 1;
-
-        } else {
-          // Binary: 1=YES, 2=NO
-          if (raw === 1) {
-            if (sec === 'Policy') pol += 1;
-            else if (sec === 'L1') l1 += 1;
-            else if (sec === 'L2') l2 += 1;
-            else if (sec === 'L3') l3 += 1;
-          }
-        }
+        if (!state[storageKey(tab,sec,i)]) return;
+        if (sec==='Policy') pol++;
+        else if (sec==='L1') l1++;
+        else if (sec==='L2') l2++;
+        else if (sec==='L3') l3++;
       });
     });
   });
-  return {l1, l2, l3, pol, total: l1+l2+l3+pol};
+  return {l1,l2,l3,pol,total:l1+l2+l3+pol};
 }
 
 function getErrors() {
@@ -1119,26 +810,8 @@ function getErrors() {
     const sections = DATA[tab];
     Object.entries(sections).forEach(([sec, items]) => {
       items.forEach((desc, i) => {
-        const k   = storageKey(tab, sec, i);
-        const raw = state[k];
-        if (!raw) return;
-
-        if (COUNTABLE.has(`${tab}||${sec}||${i}`)) {
-          // Repetible: breakdown object
-          if (typeof raw === 'object') {
-            const tot = (raw.l1||0) + (raw.l2||0) + (raw.l3||0);
-            if (tot > 0) errors.push({ tab, sec, desc, qty: tot, breakdown: raw, type: 'countable' });
-          }
-
-        } else if (SIMPLE_SCALE[`${tab}||${sec}||${i}`]) {
-          // Simple scale: single level string
-          if (typeof raw === 'string') {
-            errors.push({ tab, sec, desc, qty: 1, breakdown: null, scaleLv: raw, type: 'scale' });
-          }
-
-        } else {
-          // Binary
-          if (raw === 1) errors.push({ tab, sec, desc, qty: 1, breakdown: null, type: 'binary' });
+        if (state[storageKey(tab,sec,i)]) {
+          errors.push({ tab, sec, desc });
         }
       });
     });
@@ -1192,117 +865,30 @@ function updateNavActive() {
 }
 
 // ── CHECKLIST RENDER ─────────────────────────────────────────
-function isCountable(tab, sec, i) {
-  return COUNTABLE.has(`${tab}||${sec}||${i}`);
-}
-
-function isSimpleScale(tab, sec, i) {
-  return !!SIMPLE_SCALE[`${tab}||${sec}||${i}`];
-}
-
-function getScaleLevels(tab, sec, i) {
-  return SIMPLE_SCALE[`${tab}||${sec}||${i}`] || ["L1","L2","L3"];
-}
-
-function getCountableTotal(raw) {
-  if (!raw || typeof raw !== 'object') return 0;
-  return (raw.l1||0) + (raw.l2||0) + (raw.l3||0);
-}
-
 function renderChecklist() {
   const sections = DATA[activeTab];
   let html = '';
   Object.entries(sections).forEach(([sec, items]) => {
     const cfg = LEVEL_CFG[sec];
-    // Section total — sum all error instances
-    let secTotal = 0;
-    items.forEach((_, i) => {
-      const k = storageKey(activeTab, sec, i);
-      const raw = state[k];
-      if (!raw) return;
-      if (isCountable(activeTab, sec, i)) secTotal += getCountableTotal(raw);
-      else if (raw === 1) secTotal += 1;
-    });
-
+    const cnt = items.filter((_,i) => state[storageKey(activeTab,sec,i)]).length;
     html += `
       <div class="section">
         <div class="section-header ${cfg.bg}">
           <span class="level-pill ${cfg.pill}">${sec}</span>
           <span class="section-name ${cfg.cls}">${cfg.name}</span>
-          ${secTotal ? `<span class="sec-count">${secTotal} instancia(s)</span>` : ''}
+          ${cnt ? `<span class="sec-count">${cnt} error(es)</span>` : ''}
         </div>
         <div class="items-wrap">`;
-
     items.forEach((desc, i) => {
-      const k          = storageKey(activeTab, sec, i);
-      const raw        = state[k];
-      const countable  = isCountable(activeTab, sec, i);
-      const simpleScale = isSimpleScale(activeTab, sec, i);
-
-      let control, active;
-
-      if (countable) {
-        // ── REPETIBLE: L1[ ] L2[ ] L3[ ] inputs ──────────────
-        const v   = (raw && typeof raw === 'object') ? raw : {l1:0, l2:0, l3:0};
-        const tot = getCountableTotal(v);
-        active = tot > 0;
-        control = `
-          <div class="lvl-inputs">
-            <div class="lvl-field">
-              <span class="lvl-label lbl-l1">L1</span>
-              <input class="lvl-input ${v.l1>0?'has-l1':''}"
-                type="number" min="0" value="${v.l1||0}"
-                oninput="setLvl('${k}','l1',this.value)"
-                onclick="this.select()" />
-            </div>
-            <div class="lvl-field">
-              <span class="lvl-label lbl-l2">L2</span>
-              <input class="lvl-input ${v.l2>0?'has-l2':''}"
-                type="number" min="0" value="${v.l2||0}"
-                oninput="setLvl('${k}','l2',this.value)"
-                onclick="this.select()" />
-            </div>
-            <div class="lvl-field">
-              <span class="lvl-label lbl-l3">L3</span>
-              <input class="lvl-input ${v.l3>0?'has-l3':''}"
-                type="number" min="0" value="${v.l3||0}"
-                oninput="setLvl('${k}','l3',this.value)"
-                onclick="this.select()" />
-            </div>
-            <div class="lvl-total">
-              <span class="lvl-total-label">TOT</span>
-              <div class="lvl-total-val ${tot>0?'active':''}">${tot||0}</div>
-            </div>
-          </div>`;
-
-      } else if (simpleScale) {
-        // ── SIMPLE SCALE: single level selector ───────────────
-        const levels  = getScaleLevels(activeTab, sec, i);
-        // raw stores the selected level string: "L1", "L2", or "L3"
-        const selLvl  = (typeof raw === 'string') ? raw : null;
-        active = !!selLvl;
-        const btns = levels.map(lv => {
-          const isActive = selLvl === lv;
-          const cls = isActive ? `active-${lv.toLowerCase()}` : '';
-          return `<button class="scale-btn ${cls}" onclick="setScale('${k}','${lv}')">${lv}</button>`;
-        }).join('');
-        control = `<div class="scale-wrap">${btns}</div>`;
-
-      } else {
-        // ── BINARY: YES / NO ──────────────────────────────────
-        active = raw === 1;
-        const yesA = raw === 1 ? 'active' : '';
-        const noA  = raw === 2 ? 'active' : '';
-        control = `
-          <div class="yn-wrap">
-            <button class="yn-btn yes ${yesA}" onclick="setYN('${k}',1)">YES</button>
-            <button class="yn-btn no  ${noA}"  onclick="setYN('${k}',2)">NO</button>
-          </div>`;
-      }
-
+      const k = storageKey(activeTab, sec, i);
+      const checked = !!state[k];
       html += `
-          <div class="item ${active?'active':''}">
-            ${control}
+          <div class="item ${checked?'checked':''}" onclick="toggleItem('${k}')">
+            <div class="check-box">
+              <svg class="check-icon" width="10" height="8" viewBox="0 0 10 8" fill="none">
+                <path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
             <span class="itext">${desc}</span>
           </div>`;
     });
@@ -1312,69 +898,13 @@ function renderChecklist() {
   document.getElementById('view-checklist').innerHTML = html;
 }
 
-function setLvl(k, level, val) {
-  const n = Math.max(0, parseInt(val) || 0);
-  const current = (state[k] && typeof state[k] === 'object') ? state[k] : {l1:0, l2:0, l3:0};
-  const next = { ...current, [level]: n };
-  if (next.l1 === 0 && next.l2 === 0 && next.l3 === 0) delete state[k];
-  else state[k] = next;
-  saveState(); updateCounters();
-  // Partial re-render: just update totals without full re-render to keep focus
-  updateSectionCounts();
+function toggleItem(k) {
+  state[k] = !state[k];
+  saveState();
+  updateCounters();
+  renderChecklist();
   if (activeView === 'report') renderReport();
   if (activeView === 'summary') renderSummary();
-}
-
-function updateSectionCounts() {
-  // Update section headers and total badges without full re-render
-  const sections = DATA[activeTab];
-  Object.entries(sections).forEach(([sec, items]) => {
-    let secTotal = 0;
-    items.forEach((_, i) => {
-      const k = storageKey(activeTab, sec, i);
-      const raw = state[k];
-      if (!raw) return;
-      if (isCountable(activeTab, sec, i)) secTotal += getCountableTotal(raw);
-      else if (raw === 1) secTotal += 1;
-    });
-    // Update total display for each item
-    items.forEach((_, i) => {
-      const k = storageKey(activeTab, sec, i);
-      if (!isCountable(activeTab, sec, i)) return;
-      const raw = state[k];
-      const v   = (raw && typeof raw === 'object') ? raw : {l1:0,l2:0,l3:0};
-      const tot = getCountableTotal(v);
-      // Update input colors
-      ['l1','l2','l3'].forEach(lv => {
-        const inputs = document.querySelectorAll(`.lvl-input`);
-        // handled via full re-render on blur
-      });
-    });
-  });
-}
-
-function setScale(k, lv) {
-  // Toggle: clicking active level deselects it
-  if (state[k] === lv) delete state[k];
-  else state[k] = lv;
-  saveState(); updateCounters(); renderChecklist();
-  if (activeView === 'report') renderReport();
-  if (activeView === 'summary') renderSummary();
-}
-
-function setYN(k, val) {
-  if (state[k] === val) delete state[k];
-  else if (val === 2) delete state[k];
-  else state[k] = val;
-  saveState(); updateCounters(); renderChecklist();
-  if (activeView === 'report') renderReport();
-  if (activeView === 'summary') renderSummary();
-}
-
-// ── HELPERS ──────────────────────────────────────────────────
-function getItemIndex(tab, sec, desc) {
-  const items = DATA[tab]?.[sec] || [];
-  return items.indexOf(desc);
 }
 
 // ── GROUP ERRORS BY DELIVERABLE ──────────────────────────────
@@ -1383,6 +913,7 @@ function groupErrors() {
   const grouped = {};
   TABS.forEach(tab => { grouped[tab] = []; });
   errors.forEach(e => { grouped[e.tab].push(e); });
+  // Remove empty deliverables
   Object.keys(grouped).forEach(k => { if (!grouped[k].length) delete grouped[k]; });
   return grouped;
 }
@@ -1420,24 +951,24 @@ function renderReport() {
       </div>`;
   } else {
     Object.entries(grouped).forEach(([tab, items]) => {
+      const tabCount = items.length;
+      // Count by level for this tab
+      const tl1 = items.filter(e=>e.sec==='L1').length;
+      const tl2 = items.filter(e=>e.sec==='L2').length;
+      const tl3 = items.filter(e=>e.sec==='L3').length;
+      const tpol = items.filter(e=>e.sec==='Policy').length;
 
-      // Weighted totals (sum of qty per level)
-      const wl1  = items.filter(e=>e.sec==='L1').reduce((s,e)=>s+e.qty,0);
-      const wl2  = items.filter(e=>e.sec==='L2').reduce((s,e)=>s+e.qty,0);
-      const wl3  = items.filter(e=>e.sec==='L3').reduce((s,e)=>s+e.qty,0);
-      const wpol = items.filter(e=>e.sec==='Policy').reduce((s,e)=>s+e.qty,0);
-      const wTot = wl1+wl2+wl3+wpol;
       html += `
         <div style="margin-bottom:20px;">
           <div style="display:flex;align-items:center;gap:10px;padding:8px 14px;
                       background:var(--green-dark);border-radius:8px 8px 0 0;">
             <span style="font-size:13px;font-weight:600;color:white;">${tab}</span>
             <span style="margin-left:auto;font-size:11px;font-family:var(--mono);color:rgba(255,255,255,.7);">
-              ${wTot} instancia(s)
-              ${wl1  ? `· <span style="color:#FFE08A">L1: ${wl1}</span>`  : ''}
-              ${wl2  ? `· <span style="color:#FFBB88">L2: ${wl2}</span>`  : ''}
-              ${wl3  ? `· <span style="color:#FF9999">L3: ${wl3}</span>`  : ''}
-              ${wpol ? `· <span style="color:#CCCCCC">Policy: ${wpol}</span>` : ''}
+              ${tabCount} error(es)
+              ${tl1 ? `· <span style="color:#FFE08A">L1: ${tl1}</span>` : ''}
+              ${tl2 ? `· <span style="color:#FFBB88">L2: ${tl2}</span>` : ''}
+              ${tl3 ? `· <span style="color:#FF9999">L3: ${tl3}</span>` : ''}
+              ${tpol ? `· <span style="color:#CCCCCC">Policy: ${tpol}</span>` : ''}
             </span>
           </div>
           <table class="report-table" style="border-radius:0 0 8px 8px;overflow:hidden;">
@@ -1453,27 +984,13 @@ function renderReport() {
       const order = { L3: 0, L2: 1, L1: 2, Policy: 3 };
       const sorted = [...items].sort((a,b) => (order[a.sec]||9) - (order[b.sec]||9));
 
-      sorted.forEach(({sec, desc, qty, breakdown, scaleLv, type}) => {
-        const lvlCls  = LEVEL_TD[sec] || '';
+      sorted.forEach(({sec, desc}) => {
+        const lvlCls = LEVEL_TD[sec] || '';
         const lvlName = LEVEL_CFG[sec]?.name || sec;
-        let badges = '';
-        let effectiveLvl = lvlCls;
-
-        if (type === 'countable' && breakdown) {
-          if (breakdown.l1) badges += `<span class="qty-badge qb-l1">L1 ×${breakdown.l1}</span> `;
-          if (breakdown.l2) badges += `<span class="qty-badge qb-l2">L2 ×${breakdown.l2}</span> `;
-          if (breakdown.l3) badges += `<span class="qty-badge qb-l3">L3 ×${breakdown.l3}</span>`;
-        } else if (type === 'scale' && scaleLv) {
-          const qbCls = scaleLv==='L1'?'qb-l1':scaleLv==='L2'?'qb-l2':'qb-l3';
-          effectiveLvl = LEVEL_TD[scaleLv] || lvlCls;
-          badges = `<span class="qty-badge ${qbCls}">${scaleLv}</span>`;
-        } else {
-          badges = `<span class="qty-badge qb-yes">YES</span>`;
-        }
         html += `
               <tr>
-                <td class="rt-level ${effectiveLvl}" style="width:130px;">${lvlName}</td>
-                <td class="rt-desc">${desc} ${badges}</td>
+                <td class="rt-level ${lvlCls}" style="width:130px;">${lvlName}</td>
+                <td class="rt-desc">${desc}</td>
               </tr>`;
       });
 
@@ -1515,16 +1032,12 @@ function exportExcel() {
   reportRows.push([]);
 
   Object.entries(grouped).forEach(([tab, items]) => {
-    const wTotXl = items.reduce((s,e)=>s+e.qty,0);
-    reportRows.push([tab.toUpperCase(), '', `(${wTotXl} instancia(s))`]);
-    reportRows.push(['Nivel base', 'Total', 'Detalle L1/L2/L3', 'Descripción']);
+    reportRows.push([tab.toUpperCase(), '', `(${items.length} error(es))`]);
+    reportRows.push(['Level', 'Description']);
     const sorted = [...items].sort((a,b) => (order[a.sec]||9) - (order[b.sec]||9));
-    sorted.forEach(({sec, desc, qty, breakdown}) => {
+    sorted.forEach(({sec, desc}) => {
       const lvlName = LEVEL_CFG[sec]?.name || sec;
-      const detalle = breakdown
-        ? `L1:${breakdown.l1||0}  L2:${breakdown.l2||0}  L3:${breakdown.l3||0}`
-        : 'YES';
-      reportRows.push([lvlName, qty, detalle, desc]);
+      reportRows.push([lvlName, desc]);
     });
     reportRows.push([]);
   });
@@ -1534,25 +1047,12 @@ function exportExcel() {
   XLSX.utils.book_append_sheet(wb, wsReport, 'Error Report');
 
   // ── Sheet 2: Full flat list ──
-  const flatRows = [['Deliverable', 'Level', 'Instances', 'Description']];
+  const flatRows = [['Deliverable', 'Level', 'Description']];
   TABS.forEach(tab => {
     Object.entries(DATA[tab]).forEach(([sec, items]) => {
       items.forEach((desc, i) => {
-        const qty = state[storageKey(tab, sec, i)] || 0;
-        const rawS = state[storageKey(tab, sec, i)];
-        if (rawS) {
-          if (COUNTABLE.has(`${tab}||${sec}||${i}`)) {
-            const v   = (typeof rawS === 'object') ? rawS : {l1:0,l2:0,l3:0};
-            const tot = (v.l1||0)+(v.l2||0)+(v.l3||0);
-            if (tot > 0) {
-              const brkd = `L1:${v.l1||0}  L2:${v.l2||0}  L3:${v.l3||0}`;
-              flatRows.push([tab, LEVEL_CFG[sec]?.name || sec, tot, brkd, desc]);
-            }
-          } else if (SIMPLE_SCALE[`${tab}||${sec}||${i}`] && typeof rawS === 'string') {
-            flatRows.push([tab, LEVEL_CFG[sec]?.name || sec, 1, rawS, desc]);
-          } else if (rawS === 1) {
-            flatRows.push([tab, LEVEL_CFG[sec]?.name || sec, 1, 'YES', desc]);
-          }
+        if (state[storageKey(tab, sec, i)]) {
+          flatRows.push([tab, LEVEL_CFG[sec]?.name || sec, desc]);
         }
       });
     });
@@ -1596,7 +1096,7 @@ function copyReport() {
   if (drafter)  text += `Drafter:    ${drafter}\n`;
   if (reviewer) text += `Reviewer:   ${reviewer}\n`;
   if (date_)    text += `Date:       ${date_}\n`;
-  text += `Total instancias: ${c.total}`;
+  text += `Total errors: ${errors.length}`;
   text += `  (L1: ${c.l1}  L2: ${c.l2}  L3: ${c.l3}  Policy: ${c.pol})\n`;
   text += `${'─'.repeat(40)}\n\n`;
 
@@ -1605,21 +1105,9 @@ function copyReport() {
   Object.entries(grouped).forEach(([tab, items]) => {
     text += `▸ ${tab.toUpperCase()} (${items.length} error(es))\n`;
     const sorted = [...items].sort((a,b) => (order[a.sec]||9) - (order[b.sec]||9));
-    sorted.forEach(({sec, desc, qty, breakdown, scaleLv, type}) => {
+    sorted.forEach(({sec, desc}) => {
       const lvlName = LEVEL_CFG[sec]?.name || sec;
-      let qtyStr = '';
-      if (type === 'countable' && breakdown) {
-        const parts = [];
-        if (breakdown.l1) parts.push(`L1×${breakdown.l1}`);
-        if (breakdown.l2) parts.push(`L2×${breakdown.l2}`);
-        if (breakdown.l3) parts.push(`L3×${breakdown.l3}`);
-        qtyStr = parts.length ? `  [${parts.join(' · ')}]` : '';
-      } else if (type === 'scale' && scaleLv) {
-        qtyStr = `  [${scaleLv}]`;
-      } else {
-        qtyStr = '  [YES]';
-      }
-      text += `  [${lvlName}]${qtyStr} ${desc}\n`;
+      text += `  [${lvlName}] ${desc}\n`;
     });
     text += `\n`;
   });
@@ -1714,30 +1202,9 @@ function confirmResetAll() {
   if (activeView==='summary') renderSummary();
 }
 
-// ── DARK MODE ────────────────────────────────────────────────
-function toggleTheme() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const next = isDark ? 'light' : 'dark';
-  applyTheme(next);
-  try { localStorage.setItem('eo_theme', next); } catch(e) {}
-}
-
-function applyTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : '');
-  const icon  = document.getElementById('theme-icon');
-  const label = document.getElementById('theme-label');
-  if (icon)  icon.textContent  = theme === 'dark' ? '☀️' : '🌙';
-  if (label) label.textContent = theme === 'dark' ? 'Modo claro' : 'Modo oscuro';
-}
-
 // ── INIT ─────────────────────────────────────────────────────
 function init() {
   loadState();
-  // Restore theme
-  try {
-    const savedTheme = localStorage.getItem('eo_theme') || 'light';
-    applyTheme(savedTheme);
-  } catch(e) {}
   // Restore meta
   document.getElementById('m-wo').value       = meta.wo       || '';
   document.getElementById('m-drafter').value  = meta.drafter  || '';
