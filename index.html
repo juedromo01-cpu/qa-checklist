@@ -682,15 +682,20 @@ body {
 // type: 'repetible' | 'simple' | 'binary'
 // scales: array of allowed levels for 'simple' type (e.g. ["L1","L2","L3"])
 // note: optional clarification shown under the description
-const TABS = ["Floor Plan","RCP","Elevation","Roof Plan","PDF","Policy","McDonalds"];
+const TABS = ["Cover Page","Aerial Plan","Schematic Site Plan","Floor Plan","Dimension Plan","Roof Plan","RCP","Elevation","Electrical Plan","Equipment Plan","PDF Addon"];
 const TAB_LABELS = {
   "Floor Plan": "Floor Plan",
   "RCP": "RCP",
   "Elevation": "Elevation",
   "Roof Plan": "Roof Plan",
   "PDF": "PDF",
-  "Policy": "Policy",
-  "McDonalds": "McDonald's",
+  "Cover Page": "Cover Page",
+  "Aerial Plan": "Aerial Plan",
+  "Schematic Site Plan": "Schematic Site Plan",
+  "Equipment Plan": "Equipment Plan",
+  "Dimension Plan": "Dimension Plan",
+  "Electrical Plan": "Electrical Plan",
+  "PDF Addon": "PDF Add-on (McDonald's)",
 };
 function tabLabel(tab) { return TAB_LABELS[tab] || tab; }
 
@@ -745,6 +750,13 @@ const DATA = {
   { level:"L3", type:"binary",    desc:"Failing to follow DWG/RVT/Add-On Deliverables (catch-all SOP error)" },
   { level:"L3", type:"binary",    desc:"Drafting standard property task as a premium file" },
   { level:"L3", type:"binary",    desc:"Drafting floors for exterior spaces (unless directed by Team Lead)" },
+
+  { cat:"McDonald's - Main Floor",          level:"L1", type:"repetible", desc:"Missing elevation markers" },
+  { cat:"McDonald's - Main Floor",          level:"L1", type:"repetible", desc:"Drive-thru window arrows not oriented in opening direction" },
+  { cat:"McDonald's - Main Floor",          level:"L1", type:"binary",    desc:"Missing Void Space detail lines or wall fill region (Room Tag if it fits)" },
+  { cat:"McDonald's - Main Floor",          level:"L1", type:"repetible", desc:"Missing manual text or labels in Draft (e.g. Entry, Laundry)" },
+  { cat:"McDonald's - Main Floor",          level:"L1", type:"binary",    desc:"Missing or not fully enclosed mechanical detail lines for Main Distribution Board" },
+  { cat:"McDonald's - Main Floor",          level:"L1", type:"repetible", desc:"Missing or incorrect overhead detail lines in kitchen and service area" },
 ],
 
 "RCP": [
@@ -755,6 +767,8 @@ const DATA = {
   { level:"L1", type:"binary",    desc:"Windows on floor plan not reflected on RCP — failing to use plan region tool" },
   { level:"L2", type:"binary",    desc:"Missing individual ceilings" },
   { level:"L3", type:"binary",    desc:"Missing all ceilings/suspended/sloped/bulkheads — no effort made (L3 per level)" },
+
+  { cat:"McDonald's - RCP", level:"L1", type:"simple", scales:["L1","L2"], desc:"Missing or incorrect location of electrical ceiling outlet 6 with mechanical equipment detail lines — L1 per instance · L2 if all missing" },
 ],
 
 "Elevation": [
@@ -770,6 +784,12 @@ const DATA = {
   { level:"L1", type:"binary",    desc:"Any gaps in the structure/walls/joints" },
   { level:"L2", type:"binary",    desc:"Elevations/walls not edited to reflect actual construction (significant — little effort made)" },
   { level:"L3", type:"binary",    desc:"No effort made for elevations/walls materials and construction to reflect existing" },
+
+  { cat:"McDonald's - Elevations",          level:"L1", type:"repetible", desc:"Opening direction arrows on DT windows not showing correct direction" },
+  { cat:"McDonald's - Elevations",          level:"L1", type:"repetible", desc:"Door opening direction DL missing" },
+  { cat:"McDonald's - Elevations",          level:"L1", type:"binary",    desc:"Masking region with invisible lines to hide floor missing" },
+  { cat:"McDonald's - Elevations",          level:"L1", type:"repetible", desc:"Missing or misspelt McDonalds logos and modeled text" },
+  { cat:"McDonald's - Elevations",          level:"L2", type:"binary",    desc:"Correct template not used for extra/duplicated elevations (exterior storage, Trash Corral)" },
 ],
 
 "Roof Plan": [
@@ -780,6 +800,10 @@ const DATA = {
   { level:"L1", type:"simple",    desc:"Gables not joined correctly", scales:["L1","L2"], note:"L1 partial · L2 all gables" },
   { level:"L2", type:"binary",    desc:"Incorrect family type of roof selected (sloped/flat) or not edited for thickness" },
   { level:"L3", type:"binary",    desc:"Missing roof — no effort made" },
+
+  { cat:"McDonald's - Roof Plan",           level:"L1", type:"binary",    desc:"Incorrect roof type selected (flat vs slope)" },
+  { cat:"McDonald's - Roof Plan",           level:"L1", type:"simple",    scales:["L1","L2"], desc:"Incorrect dimensions for scanned equipment only — L1 isolated · L2 all missing" },
+  { cat:"McDonald's - Roof Plan",           level:"L2", type:"binary",    desc:"Missing all dimension strings for scanned equipment (rooftop units, fans, vents, condensers)" },
 ],
 
 "PDF": [
@@ -802,27 +826,20 @@ const DATA = {
 
 
 
-"Policy": [
-  { cat:"Export & Upload", level:"Other", type:"binary", desc:"Failing to export to correct units (Imperial/Metric)" },
-  { cat:"Export & Upload", level:"Other", type:"binary", desc:"Failing to upload RVT file to portal" },
-  { cat:"Export & Upload", level:"Other", type:"binary", desc:"Failing to upload all corresponding DWG files for all levels" },
-  { cat:"Export & Upload", level:"Other", type:"binary", desc:"Add-ons not included upon export (e.g. PDF + Roof needs both DWG and sheet)" },
-  { cat:"Process",         level:"Other", type:"binary", desc:"Publishing DWG files without QA under normal circumstances" },
-  { cat:"Process",         level:"Other", type:"binary", desc:"Failing to claim tasks in order within DWG queues" },
-  { cat:"Process",         level:"Other", type:"binary", desc:"Failing to hide DXF underlays on plans prior to exporting" },
-  { cat:"Process",         level:"Other", type:"binary", desc:"DXF not shown in 3D" },
-],
-
-"McDonalds": [
+"Cover Page": [
   { cat:"Cover Page",          level:"L1", type:"repetible", desc:"Missing storefront, aerial or map view image (Google Earth/Maps)" },
   { cat:"Cover Page",          level:"L1", type:"repetible", desc:"Missing or misspelled labels on cover page" },
   { cat:"Cover Page",          level:"L2", type:"binary",    desc:"Aerial and map view photos not rotated to same orientation as floor plans" },
   { cat:"Cover Page",          level:"L2", type:"binary",    desc:"Incorrect Site ID # and NSN # (e.g. 1111 NSN 2222)" },
+],
 
+"Aerial Plan": [
   { cat:"Aerial Plan",         level:"L1", type:"binary",    desc:"Missing filled region for scanned area (Main Floor & Trash Corral)" },
   { cat:"Aerial Plan",         level:"L1", type:"repetible", desc:"Missing labels: gas meter, grease trap, transformer (apply only if present on project)" },
   { cat:"Aerial Plan",         level:"L3", type:"binary",    desc:"Using AI images for storefront — omit aerial plan if Google Maps has no clear image" },
+],
 
+"Schematic Site Plan": [
   { cat:"Schematic Site Plan", level:"L1", type:"binary",    desc:"Missing filled region for scanned area (Main Floor & Trash Corral)" },
   { cat:"Schematic Site Plan", level:"L1", type:"repetible", desc:"Missing or incorrectly aligned detail lines for parking spaces" },
   { cat:"Schematic Site Plan", level:"L1", type:"binary",    desc:"Missing handicap parking symbol" },
@@ -840,45 +857,35 @@ const DATA = {
   { cat:"Schematic Site Plan", level:"L2", type:"binary",    desc:"Failing to hide unnecessary objects from the floor plan" },
   { cat:"Schematic Site Plan", level:"L3", type:"binary",    desc:"Missing reference image of the project" },
   { cat:"Schematic Site Plan", level:"L3", type:"binary",    desc:"Missing DXF for the main building" },
+],
 
-  { cat:"Main Floor",          level:"L1", type:"repetible", desc:"Missing elevation markers" },
-  { cat:"Main Floor",          level:"L1", type:"repetible", desc:"Drive-thru window arrows not oriented in opening direction" },
-  { cat:"Main Floor",          level:"L1", type:"binary",    desc:"Missing Void Space detail lines or wall fill region (Room Tag if it fits)" },
-  { cat:"Main Floor",          level:"L1", type:"repetible", desc:"Missing manual text or labels in Draft (e.g. Entry, Laundry)" },
-  { cat:"Main Floor",          level:"L1", type:"binary",    desc:"Missing or not fully enclosed mechanical detail lines for Main Distribution Board" },
-  { cat:"Main Floor",          level:"L1", type:"repetible", desc:"Missing or incorrect overhead detail lines in kitchen and service area" },
-
+"Equipment Plan": [
   { cat:"Equipment Plan",      level:"L1", type:"repetible", desc:"Missing or incorrect equipment objects (undersized, oversized, wrong position or type) — L1 per item · L2 per section · L3 per room" },
   { cat:"Equipment Plan",      level:"L1", type:"repetible", desc:"Missing or incorrect labeling for each piece of equipment — L1 per item · L2 per section · L3 per room" },
+],
 
+"Dimension Plan": [
   { cat:"Dimension Plan",      level:"L1", type:"repetible", desc:"Missing or incorrect exterior overall dimension strings" },
   { cat:"Dimension Plan",      level:"L1", type:"repetible", desc:"Missing or incorrect wall faces dimension strings" },
   { cat:"Dimension Plan",      level:"L1", type:"repetible", desc:"Missing or incorrect wall faces and all openings dimension strings" },
   { cat:"Dimension Plan",      level:"L1", type:"binary",    desc:"Continuous dimensions not aligned, organized or readable" },
   { cat:"Dimension Plan",      level:"L1", type:"binary",    desc:"Measurement values not visible" },
+],
 
-  { cat:"Roof Plan",           level:"L1", type:"binary",    desc:"Incorrect roof type selected (flat vs slope)" },
-  { cat:"Roof Plan",           level:"L1", type:"simple",    scales:["L1","L2"], desc:"Incorrect dimensions for scanned equipment only — L1 isolated · L2 all missing" },
-  { cat:"Roof Plan",           level:"L2", type:"binary",    desc:"Missing all dimension strings for scanned equipment (rooftop units, fans, vents, condensers)" },
-
-  { cat:"Reflected Ceiling Plan", level:"L1", type:"simple", scales:["L1","L2"], desc:"Missing or incorrect location of electrical ceiling outlet 6 with mechanical equipment detail lines — L1 per instance · L2 if all missing" },
-
-  { cat:"Elevations",          level:"L1", type:"repetible", desc:"Opening direction arrows on DT windows not showing correct direction" },
-  { cat:"Elevations",          level:"L1", type:"repetible", desc:"Door opening direction DL missing" },
-  { cat:"Elevations",          level:"L1", type:"binary",    desc:"Masking region with invisible lines to hide floor missing" },
-  { cat:"Elevations",          level:"L1", type:"repetible", desc:"Missing or misspelt McDonalds logos and modeled text" },
-  { cat:"Elevations",          level:"L2", type:"binary",    desc:"Correct template not used for extra/duplicated elevations (exterior storage, Trash Corral)" },
-
+"Electrical Plan": [
   { cat:"Electrical Plan",     level:"L1", type:"simple",    scales:["L1","L2","L3"], desc:"Missing electrical components — L1 per item · L2 minimal effort · L3 zero effort" },
   { cat:"Electrical Plan",     level:"L1", type:"repetible", desc:"Outlet height not noted as x-x AFF (Above Finished Floor) per missing label" },
   { cat:"Electrical Plan",     level:"L1", type:"simple",    scales:["L1","L2"],      desc:"Missing or incorrect dimension strings — L1 some · L2 minimal effort" },
   { cat:"Electrical Plan",     level:"L1", type:"repetible", desc:"Missing or incorrect electrical components" },
   { cat:"Electrical Plan",     level:"L2", type:"binary",    desc:"Most Above Finished Floor (AFF) labels missing with minimal effort" },
+],
 
+"PDF Addon": [
   { cat:"PDF Add-on",          level:"L1", type:"binary",    desc:"QR colors not in correct order (red first, then black)" },
   { cat:"PDF Add-on",          level:"L1", type:"binary",    desc:"QR code link not changed from youriguide.com to visualfloorplans.com" },
   { cat:"PDF Add-on",          level:"L1", type:"binary",    desc:"Missing or incorrect scale on the site plan and electrical plan sheet" },
 ],
+
 };
 
 const LEVEL_CFG = {
