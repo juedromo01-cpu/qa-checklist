@@ -682,7 +682,17 @@ body {
 // type: 'repetible' | 'simple' | 'binary'
 // scales: array of allowed levels for 'simple' type (e.g. ["L1","L2","L3"])
 // note: optional clarification shown under the description
-const TABS = ["Floor Plan","RCP","Elevation","Roof Plan","PDF"];
+const TABS = ["Floor Plan","RCP","Elevation","Roof Plan","PDF","Policy","McDonalds"];
+const TAB_LABELS = {
+  "Floor Plan": "Floor Plan",
+  "RCP": "RCP",
+  "Elevation": "Elevation",
+  "Roof Plan": "Roof Plan",
+  "PDF": "PDF",
+  "Policy": "Policy",
+  "McDonalds": "McDonald's",
+};
+function tabLabel(tab) { return TAB_LABELS[tab] || tab; }
 
 const DATA = {
 
@@ -786,8 +796,89 @@ const DATA = {
   { level:"L3", type:"binary",    desc:"Dimension plan not completed" },
   { level:"L3", type:"binary",    desc:"All sheets not set up" },
   { level:"L3", type:"binary",    desc:"Missing floor area plans" },
+  // ── New from Managed Services ──
+  { level:"L1", type:"simple",    desc:"Floor plan on sheets does not follow a consistent orientation", scales:["L1","L2","L3"], note:"L1 some · L2 minimal effort · L3 zero effort" },
 ],
 
+
+
+"Policy": [
+  { cat:"Export & Upload", level:"Other", type:"binary", desc:"Failing to export to correct units (Imperial/Metric)" },
+  { cat:"Export & Upload", level:"Other", type:"binary", desc:"Failing to upload RVT file to portal" },
+  { cat:"Export & Upload", level:"Other", type:"binary", desc:"Failing to upload all corresponding DWG files for all levels" },
+  { cat:"Export & Upload", level:"Other", type:"binary", desc:"Add-ons not included upon export (e.g. PDF + Roof needs both DWG and sheet)" },
+  { cat:"Process",         level:"Other", type:"binary", desc:"Publishing DWG files without QA under normal circumstances" },
+  { cat:"Process",         level:"Other", type:"binary", desc:"Failing to claim tasks in order within DWG queues" },
+  { cat:"Process",         level:"Other", type:"binary", desc:"Failing to hide DXF underlays on plans prior to exporting" },
+  { cat:"Process",         level:"Other", type:"binary", desc:"DXF not shown in 3D" },
+],
+
+"McDonalds": [
+  { cat:"Cover Page",          level:"L1", type:"repetible", desc:"Missing storefront, aerial or map view image (Google Earth/Maps)" },
+  { cat:"Cover Page",          level:"L1", type:"repetible", desc:"Missing or misspelled labels on cover page" },
+  { cat:"Cover Page",          level:"L2", type:"binary",    desc:"Aerial and map view photos not rotated to same orientation as floor plans" },
+  { cat:"Cover Page",          level:"L2", type:"binary",    desc:"Incorrect Site ID # and NSN # (e.g. 1111 NSN 2222)" },
+
+  { cat:"Aerial Plan",         level:"L1", type:"binary",    desc:"Missing filled region for scanned area (Main Floor & Trash Corral)" },
+  { cat:"Aerial Plan",         level:"L1", type:"repetible", desc:"Missing labels: gas meter, grease trap, transformer (apply only if present on project)" },
+  { cat:"Aerial Plan",         level:"L3", type:"binary",    desc:"Using AI images for storefront — omit aerial plan if Google Maps has no clear image" },
+
+  { cat:"Schematic Site Plan", level:"L1", type:"binary",    desc:"Missing filled region for scanned area (Main Floor & Trash Corral)" },
+  { cat:"Schematic Site Plan", level:"L1", type:"repetible", desc:"Missing or incorrectly aligned detail lines for parking spaces" },
+  { cat:"Schematic Site Plan", level:"L1", type:"binary",    desc:"Missing handicap parking symbol" },
+  { cat:"Schematic Site Plan", level:"L1", type:"repetible", desc:"Missing, incorrect or misspelt street names (must be All Caps, no abbreviations)" },
+  { cat:"Schematic Site Plan", level:"L1", type:"repetible", desc:"Missing dimension strings (window-to-window, drive-thru island, order board edge-to-edge)" },
+  { cat:"Schematic Site Plan", level:"L1", type:"binary",    desc:"Missing or incorrect total sq ft of Main Floor only" },
+  { cat:"Schematic Site Plan", level:"L2", type:"binary",    desc:"Reference image of the project is not scaled properly" },
+  { cat:"Schematic Site Plan", level:"L2", type:"binary",    desc:"Incorrect grass, soil or gravel hatch pattern on project" },
+  { cat:"Schematic Site Plan", level:"L2", type:"binary",    desc:"Incorrect concrete hatch pattern for sidewalks" },
+  { cat:"Schematic Site Plan", level:"L2", type:"binary",    desc:"Incorrect detail line type for the parking stall" },
+  { cat:"Schematic Site Plan", level:"L2", type:"binary",    desc:"Failing to offset C.O.D to Cash detail line 5' from building (not using hidden x3 detail line)" },
+  { cat:"Schematic Site Plan", level:"L2", type:"binary",    desc:"Incorrect C.O.D to Cash measurement" },
+  { cat:"Schematic Site Plan", level:"L2", type:"binary",    desc:"Failing to remove fractions on the dimension strings" },
+  { cat:"Schematic Site Plan", level:"L2", type:"binary",    desc:"Failing to dimension edge-to-edge of the drive-thru island and order objects" },
+  { cat:"Schematic Site Plan", level:"L2", type:"binary",    desc:"Failing to hide unnecessary objects from the floor plan" },
+  { cat:"Schematic Site Plan", level:"L3", type:"binary",    desc:"Missing reference image of the project" },
+  { cat:"Schematic Site Plan", level:"L3", type:"binary",    desc:"Missing DXF for the main building" },
+
+  { cat:"Main Floor",          level:"L1", type:"repetible", desc:"Missing elevation markers" },
+  { cat:"Main Floor",          level:"L1", type:"repetible", desc:"Drive-thru window arrows not oriented in opening direction" },
+  { cat:"Main Floor",          level:"L1", type:"binary",    desc:"Missing Void Space detail lines or wall fill region (Room Tag if it fits)" },
+  { cat:"Main Floor",          level:"L1", type:"repetible", desc:"Missing manual text or labels in Draft (e.g. Entry, Laundry)" },
+  { cat:"Main Floor",          level:"L1", type:"binary",    desc:"Missing or not fully enclosed mechanical detail lines for Main Distribution Board" },
+  { cat:"Main Floor",          level:"L1", type:"repetible", desc:"Missing or incorrect overhead detail lines in kitchen and service area" },
+
+  { cat:"Equipment Plan",      level:"L1", type:"repetible", desc:"Missing or incorrect equipment objects (undersized, oversized, wrong position or type) — L1 per item · L2 per section · L3 per room" },
+  { cat:"Equipment Plan",      level:"L1", type:"repetible", desc:"Missing or incorrect labeling for each piece of equipment — L1 per item · L2 per section · L3 per room" },
+
+  { cat:"Dimension Plan",      level:"L1", type:"repetible", desc:"Missing or incorrect exterior overall dimension strings" },
+  { cat:"Dimension Plan",      level:"L1", type:"repetible", desc:"Missing or incorrect wall faces dimension strings" },
+  { cat:"Dimension Plan",      level:"L1", type:"repetible", desc:"Missing or incorrect wall faces and all openings dimension strings" },
+  { cat:"Dimension Plan",      level:"L1", type:"binary",    desc:"Continuous dimensions not aligned, organized or readable" },
+  { cat:"Dimension Plan",      level:"L1", type:"binary",    desc:"Measurement values not visible" },
+
+  { cat:"Roof Plan",           level:"L1", type:"binary",    desc:"Incorrect roof type selected (flat vs slope)" },
+  { cat:"Roof Plan",           level:"L1", type:"simple",    scales:["L1","L2"], desc:"Incorrect dimensions for scanned equipment only — L1 isolated · L2 all missing" },
+  { cat:"Roof Plan",           level:"L2", type:"binary",    desc:"Missing all dimension strings for scanned equipment (rooftop units, fans, vents, condensers)" },
+
+  { cat:"Reflected Ceiling Plan", level:"L1", type:"simple", scales:["L1","L2"], desc:"Missing or incorrect location of electrical ceiling outlet 6 with mechanical equipment detail lines — L1 per instance · L2 if all missing" },
+
+  { cat:"Elevations",          level:"L1", type:"repetible", desc:"Opening direction arrows on DT windows not showing correct direction" },
+  { cat:"Elevations",          level:"L1", type:"repetible", desc:"Door opening direction DL missing" },
+  { cat:"Elevations",          level:"L1", type:"binary",    desc:"Masking region with invisible lines to hide floor missing" },
+  { cat:"Elevations",          level:"L1", type:"repetible", desc:"Missing or misspelt McDonalds logos and modeled text" },
+  { cat:"Elevations",          level:"L2", type:"binary",    desc:"Correct template not used for extra/duplicated elevations (exterior storage, Trash Corral)" },
+
+  { cat:"Electrical Plan",     level:"L1", type:"simple",    scales:["L1","L2","L3"], desc:"Missing electrical components — L1 per item · L2 minimal effort · L3 zero effort" },
+  { cat:"Electrical Plan",     level:"L1", type:"repetible", desc:"Outlet height not noted as x-x AFF (Above Finished Floor) per missing label" },
+  { cat:"Electrical Plan",     level:"L1", type:"simple",    scales:["L1","L2"],      desc:"Missing or incorrect dimension strings — L1 some · L2 minimal effort" },
+  { cat:"Electrical Plan",     level:"L1", type:"repetible", desc:"Missing or incorrect electrical components" },
+  { cat:"Electrical Plan",     level:"L2", type:"binary",    desc:"Most Above Finished Floor (AFF) labels missing with minimal effort" },
+
+  { cat:"PDF Add-on",          level:"L1", type:"binary",    desc:"QR colors not in correct order (red first, then black)" },
+  { cat:"PDF Add-on",          level:"L1", type:"binary",    desc:"QR code link not changed from youriguide.com to visualfloorplans.com" },
+  { cat:"PDF Add-on",          level:"L1", type:"binary",    desc:"Missing or incorrect scale on the site plan and electrical plan sheet" },
+],
 };
 
 const LEVEL_CFG = {
@@ -936,7 +1027,7 @@ function buildNav() {
     <div class="nav-item ${tab===activeTab && activeView==='checklist' ? 'active' : ''}"
          id="navtab-${tab.replace(/\s/g,'_')}"
          onclick="switchTab('${tab}')">
-      <span>${tab}</span>
+      <span>${tabLabel(tab)}</span>
       <span class="nav-badge" id="nb-${tab}"></span>
     </div>
   `).join('');
@@ -969,10 +1060,38 @@ function effectiveBadge(item, raw) {
 
 // ── CHECKLIST RENDER ─────────────────────────────────────────
 function renderChecklist() {
-  const items = DATA[activeTab] || [];
-  let html = '<div class="items-wrap">';
+  const allItems = DATA[activeTab] || [];
 
-  items.forEach((item, i) => {
+  // Group by cat field if present
+  const grouped = {};
+  const catOrder = [];
+  allItems.forEach((item, i) => {
+    const cat = item.cat || 'General';
+    if (!grouped[cat]) { grouped[cat] = []; catOrder.push(cat); }
+    grouped[cat].push({ item, i });
+  });
+
+  let html = '';
+
+  catOrder.forEach(cat => {
+    const catItems = grouped[cat];
+    const catTotal = catItems.reduce((s, {item, i}) => {
+      const raw = state[storageKey(activeTab, i)];
+      if (!raw) return s;
+      if (item.type === 'repetible') return s + getRepTotal(typeof raw==='object'?raw:{l1:0,l2:0,l3:0});
+      if (item.type === 'simple' && typeof raw === 'string') return s + 1;
+      if (item.type === 'binary' && raw === 1) return s + 1;
+      return s;
+    }, 0);
+
+    html += `<div class="section">
+      <div class="section-header sh-cat">
+        <span class="cat-name">${cat}</span>
+        ${catTotal ? `<span class="sec-count">${catTotal} error(es)</span>` : ''}
+      </div>
+      <div class="items-wrap">`;
+
+    catItems.forEach(({item, i}) => {
     const k   = storageKey(activeTab, i);
     const raw = state[k];
     let control, active;
@@ -1044,10 +1163,12 @@ function renderChecklist() {
         ${control}
         <span class="itext">${item.desc}${noteHtml}</span>
       </div>`;
-  });
+    }); // end catItems.forEach
 
-  html += `</div>`;
-  html += `<button class="btn-reset-tab" onclick="resetTab()">↺ Reset ${activeTab}</button>`;
+    html += '</div></div>'; // close items-wrap + section div
+  }); // end catOrder.forEach
+
+  html += `<button class="btn-reset-tab" onclick="resetTab()">↺ Reset ${tabLabel(activeTab)}</button>`;
   document.getElementById('view-checklist').innerHTML = html;
 }
 
@@ -1365,7 +1486,7 @@ function switchView(v) {
   document.getElementById('view-report').style.display    = v==='report'    ? '' : 'none';
   document.getElementById('view-summary').style.display   = v==='summary'   ? '' : 'none';
   document.getElementById('page-title').textContent =
-    v==='checklist' ? activeTab :
+    v==='checklist' ? tabLabel(activeTab) :
     v==='report'    ? 'Error Report' : 'Summary';
   updateNavActive();
   if (v==='report')  renderReport();
@@ -1380,7 +1501,7 @@ function switchTab(tab) {
 }
 
 function resetTab() {
-  if (!confirm(`¿Limpiar todos los errores de "${activeTab}"?`)) return;
+  if (!confirm(`¿Limpiar todos los errores de "${tabLabel(activeTab)}"?`)) return;
   (DATA[activeTab] || []).forEach((_,i) => { delete state[storageKey(activeTab,i)]; });
   saveState();
   renderChecklist();
